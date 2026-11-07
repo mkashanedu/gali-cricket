@@ -1,0 +1,306 @@
+/* ============================================================
+   GALI CRICKET — Mohalla League
+   Truck-art style: deep green base, bright pink / yellow /
+   orange painted borders, signboard lettering.
+   No image assets — all patterns are CSS gradients.
+   ============================================================ */
+
+:root{
+  --green-deep:#0b3d2e;
+  --green-dark:#072a1f;
+  --green-pitch1:#0e5a3c;
+  --green-pitch2:#083322;
+  --pink:#ff2e88;
+  --yellow:#ffd400;
+  --orange:#ff7b00;
+  --mint:#00c853;
+  --sky:#00b0ff;
+  --cream:#fff8e1;
+  --ball-color:#ffd400;
+  --ball-tape:#ffffff;
+  --bat-color:#c98d4b;
+  --jersey:#ff2e88;
+}
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html,body{ margin:0; padding:0; }
+body{
+  font-family:"Segoe UI", Roboto, "Arial Rounded MT Bold", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 50% -10%, #116149 0%, var(--green-deep) 55%, var(--green-dark) 100%);
+  color:var(--cream);
+  min-height:100vh;
+  display:flex; justify-content:center;
+}
+
+#app{ width:100%; max-width:480px; min-height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+
+/* ---------- Truck-art border (painted stripes + dots) ---------- */
+.ta-frame{
+  border:4px solid var(--yellow);
+  border-radius:18px;
+  box-shadow:0 0 0 3px var(--pink), 0 0 0 7px var(--orange), 0 10px 24px rgba(0,0,0,.45);
+  background:rgba(4,32,24,.72);
+}
+.ta-strip{
+  height:14px;
+  background:
+    repeating-linear-gradient(45deg,
+      var(--pink) 0 16px, var(--yellow) 16px 32px,
+      var(--orange) 32px 48px, var(--mint) 48px 64px,
+      var(--sky) 64px 80px);
+  border-radius:7px;
+}
+.ta-strip.dots{
+  background:
+    radial-gradient(circle, var(--yellow) 3.5px, transparent 4px) 0 0/22px 14px repeat-x,
+    repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--orange) 22px 44px);
+}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 14px 4px;
+}
+.coin-box{
+  display:flex; align-items:center; gap:7px;
+  background:rgba(0,0,0,.35); border:2px solid var(--yellow); border-radius:999px;
+  padding:5px 14px 5px 8px; font-weight:800; font-size:17px; color:var(--yellow);
+}
+.coin-dot{
+  width:20px; height:20px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #ffe97a, var(--yellow) 60%, #c9a400);
+  border:2px solid #fff3b0; box-shadow:inset 0 0 0 2px #c9a400;
+}
+.icon-btn{
+  background:rgba(0,0,0,.35); color:var(--cream); border:2px solid var(--cream);
+  width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer;
+}
+.icon-btn:active{ transform:scale(.93); }
+
+/* ---------- Signboard headings ---------- */
+h1.logo{
+  font-family:"Arial Black","Segoe UI Black",Arial,sans-serif;
+  font-size:52px; line-height:.95; margin:6px 0 2px; text-align:center;
+  letter-spacing:1px; color:var(--yellow);
+  text-shadow:
+    3px 3px 0 var(--pink),
+    6px 6px 0 var(--orange),
+    9px 9px 0 rgba(0,0,0,.35);
+  transform:rotate(-2deg);
+}
+.logo-sub{
+  text-align:center; font-weight:900; letter-spacing:4px; font-size:15px;
+  color:#fff; text-transform:uppercase; margin:8px 0 2px;
+  text-shadow:2px 2px 0 var(--pink);
+}
+.logo-emblem{ display:flex; justify-content:center; margin-top:10px; }
+.emblem-ball{
+  width:74px; height:74px; border-radius:50%; position:relative;
+  background:
+    linear-gradient(100deg, transparent 42%, var(--ball-tape) 42%, var(--ball-tape) 58%, transparent 58%),
+    radial-gradient(circle at 34% 30%, #fff3a6, var(--ball-color) 55%, #d8ae00);
+  border:4px solid #fff8e1;
+  box-shadow:0 6px 16px rgba(0,0,0,.5);
+}
+.emblem-bat{
+  width:16px; height:86px; margin-left:-14px; margin-top:8px;
+  background:linear-gradient(180deg, var(--bat-color), #9a6a33);
+  border:3px solid #fff8e1; border-radius:8px;
+  transform:rotate(38deg); box-shadow:0 6px 16px rgba(0,0,0,.5);
+}
+h2.screen-title{
+  font-family:"Arial Black",Arial,sans-serif; text-align:center;
+  color:var(--yellow); font-size:28px; margin:10px 0 4px;
+  text-shadow:2px 2px 0 var(--pink);
+}
+
+/* ---------- Screens ---------- */
+.screen{ display:none; flex-direction:column; flex:1; padding:8px 16px 18px; }
+.screen.active{ display:flex; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:block; width:100%; border:none; cursor:pointer;
+  font-family:"Arial Black",Arial,sans-serif; letter-spacing:.5px;
+  border-radius:16px; padding:16px 12px; font-size:21px; color:#fff;
+  margin:10px 0; text-align:center;
+  box-shadow:0 6px 0 rgba(0,0,0,.35), inset 0 0 0 3px rgba(255,255,255,.35);
+  transition:transform .06s ease, box-shadow .06s ease;
+}
+.btn:active{ transform:translateY(4px); box-shadow:0 2px 0 rgba(0,0,0,.35), inset 0 0 0 3px rgba(255,255,255,.35); }
+.btn-play{ background:linear-gradient(180deg,#ff5ea8,var(--pink) 55%,#d11568); font-size:27px; }
+.btn-shop{ background:linear-gradient(180deg,#ffb03a,var(--orange) 55%,#d95f00); }
+.btn-small{ font-size:16px; padding:12px 10px; background:linear-gradient(180deg,#1db954,var(--mint) 60%,#00913f); }
+.btn-ghost{ background:rgba(0,0,0,.35); box-shadow:0 6px 0 rgba(0,0,0,.35), inset 0 0 0 3px var(--cream); font-size:16px; }
+
+/* ---------- Home ---------- */
+.stat-row{ display:flex; gap:10px; margin:12px 0 2px; }
+.stat-card{
+  flex:1; text-align:center; padding:10px 6px; border-radius:14px;
+  background:rgba(0,0,0,.3); border:2px dashed var(--yellow);
+}
+.stat-card .num{ font-family:"Arial Black",Arial,sans-serif; font-size:23px; color:var(--yellow); }
+.stat-card .lbl{ font-size:12px; letter-spacing:1px; opacity:.85; text-transform:uppercase; }
+
+.team-title{ text-align:center; font-weight:900; margin:14px 0 6px; letter-spacing:1px; }
+.teams{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.team-card{
+  border-radius:14px; padding:12px 8px; text-align:center; cursor:pointer;
+  background:rgba(0,0,0,.3); border:3px solid rgba(255,255,255,.25);
+  font-weight:800; font-size:15px;
+}
+.team-card .badge{
+  display:inline-block; width:42px; height:42px; line-height:42px; border-radius:50%;
+  font-family:"Arial Black",Arial,sans-serif; color:#fff; margin-bottom:6px;
+  border:3px solid #fff8e1;
+}
+.team-card.selected{ border-color:var(--yellow); background:rgba(255,212,0,.14); box-shadow:0 0 0 2px var(--pink); }
+.daily-note{ text-align:center; font-size:13px; color:var(--yellow); min-height:18px; margin-top:6px; font-weight:700;}
+.footer-note{ text-align:center; margin-top:auto; padding-top:14px; font-weight:900; letter-spacing:3px; font-size:13px; opacity:.8; }
+.howto{ font-size:14px; line-height:1.55; background:rgba(0,0,0,.3); border-radius:14px; padding:10px 14px; border:2px solid rgba(255,255,255,.18); }
+
+/* ---------- Game screen ---------- */
+.score-strip{
+  display:flex; justify-content:space-between; align-items:center; gap:6px;
+  background:rgba(0,0,0,.4); border:2px solid var(--yellow); border-radius:12px;
+  padding:8px 10px; font-weight:800; font-size:14px; flex-wrap:wrap;
+}
+.score-strip .big{ font-family:"Arial Black",Arial,sans-serif; font-size:19px; color:var(--yellow); }
+.score-strip .need{ color:#8be28b; }
+.wkts{ color:var(--pink); letter-spacing:2px; }
+
+#pitch{
+  position:relative; flex:1; min-height:340px; margin-top:12px; border-radius:18px;
+  overflow:hidden; cursor:pointer;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.12)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.045) 0 46px, rgba(0,0,0,.05) 46px 92px),
+    linear-gradient(180deg, var(--green-pitch1), var(--green-pitch2));
+  border:4px solid var(--yellow);
+  box-shadow:inset 0 0 0 3px var(--pink), inset 0 0 60px rgba(0,0,0,.35);
+}
+.pitch-name{ position:absolute; top:8px; left:0; right:0; text-align:center; font-weight:900; letter-spacing:2px; font-size:12px; opacity:.75; text-transform:uppercase; }
+.crease{ position:absolute; left:12%; right:12%; height:3px; background:rgba(255,248,225,.55); border-radius:2px; }
+.crease.top{ top:16%; } .crease.bottom{ bottom:15%; }
+
+/* Bowler figure (top) */
+.bowler{ position:absolute; top:5%; left:50%; transform:translateX(-50%); text-align:center; }
+.figure-head{ width:20px; height:20px; border-radius:50%; background:#f2c79b; margin:0 auto; border:2px solid rgba(0,0,0,.3); }
+.figure-body{ width:30px; height:34px; border-radius:10px 10px 6px 6px; margin:2px auto 0; background:#37474f; border:2px solid rgba(0,0,0,.3); }
+
+/* Batsman + stumps (bottom) */
+.bat-zone{ position:absolute; bottom:4%; left:50%; transform:translateX(-50%); width:150px; height:110px; }
+.stumps{ position:absolute; bottom:6px; left:50%; transform:translateX(-50%); display:flex; gap:6px; }
+.stump{ width:8px; height:46px; background:var(--yellow); border-radius:3px; box-shadow:inset 0 0 0 1px #b7950b; }
+.batsman{ position:absolute; bottom:2px; left:6px; text-align:center; }
+.batsman .figure-body{ background:var(--jersey); }
+#bat{
+  position:absolute; bottom:22px; left:96px; width:13px; height:64px;
+  background:linear-gradient(180deg, var(--bat-color), #9a6a33);
+  border:2px solid rgba(0,0,0,.35); border-radius:6px;
+  transform-origin:50% 88%; transform:rotate(24deg);
+}
+#bat.swing{ animation:swing .28s ease-in-out; }
+@keyframes swing{ 0%{transform:rotate(24deg)} 45%{transform:rotate(-64deg)} 100%{transform:rotate(24deg)} }
+
+/* The tape ball */
+#ball{
+  position:absolute; width:22px; height:22px; border-radius:50%;
+  left:50%; top:14%; margin-left:-11px; z-index:5; display:none;
+  background:
+    linear-gradient(100deg, transparent 40%, var(--ball-tape) 40%, var(--ball-tape) 60%, transparent 60%),
+    radial-gradient(circle at 34% 30%, rgba(255,255,255,.85), var(--ball-color) 55%, rgba(0,0,0,.28));
+  border:2px solid rgba(255,248,225,.9);
+  box-shadow:0 4px 8px rgba(0,0,0,.4);
+}
+#ballTrail{ position:absolute; inset:0; z-index:4; pointer-events:none; }
+.trail-dot{ position:absolute; border-radius:50%; background:var(--ball-color); opacity:.35; }
+
+/* Timing ring at the hitting zone */
+#timingRing{
+  position:absolute; bottom:12%; left:50%; transform:translateX(-50%);
+  width:110px; height:110px; border-radius:50%;
+  border:4px dashed rgba(255,212,0,.85);
+  box-shadow:0 0 0 6px rgba(255,46,136,.35), inset 0 0 24px rgba(255,212,0,.25);
+  display:none; z-index:3;
+  animation:ringpulse 0.7s ease-in-out infinite alternate;
+}
+@keyframes ringpulse{ from{ transform:translateX(-50%) scale(.94);} to{ transform:translateX(-50%) scale(1.05);} }
+
+.ball-label{ text-align:center; font-weight:900; font-size:17px; color:var(--yellow); min-height:24px; margin-top:8px; text-shadow:1px 1px 0 #000; }
+.commentary{ text-align:center; font-size:15px; font-style:italic; min-height:22px; margin-top:2px; color:#eaffea; }
+
+#btnHit{
+  margin-top:10px; font-size:30px; padding:18px 12px;
+  background:linear-gradient(180deg,#ff5ea8,var(--pink) 55%,#d11568);
+}
+#btnHit:disabled{ filter:grayscale(.55) brightness(.75); }
+
+/* Result banner overlay */
+#banner{
+  position:absolute; inset:0; display:none; align-items:center; justify-content:center;
+  flex-direction:column; z-index:9; pointer-events:none; text-align:center; padding:0 12px;
+}
+#banner.show{ display:flex; }
+#bannerText{
+  font-family:"Arial Black",Arial,sans-serif; font-size:52px; color:var(--yellow);
+  text-shadow:3px 3px 0 var(--pink), 6px 6px 0 rgba(0,0,0,.4);
+  animation:pop .35s ease-out;
+}
+#bannerText.out{ color:#ff5252; }
+#bannerText.win{ color:#8be28b; }
+@keyframes pop{ 0%{ transform:scale(.3) rotate(-6deg); opacity:0;} 70%{ transform:scale(1.15) rotate(2deg);} 100%{ transform:scale(1) rotate(0); opacity:1;} }
+.shake{ animation:shake .45s ease-in-out; }
+@keyframes shake{ 0%,100%{transform:translateX(0)} 20%{transform:translateX(-9px)} 40%{transform:translateX(9px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(6px)} }
+
+.confetti{ position:absolute; top:-14px; width:10px; height:16px; z-index:10; border-radius:2px; animation:fall linear forwards; }
+@keyframes fall{ to{ transform:translateY(110vh) rotate(560deg); } }
+
+/* ---------- Result screen ---------- */
+.result-card{ padding:16px; margin-top:8px; text-align:center; }
+.result-title{ font-family:"Arial Black",Arial,sans-serif; font-size:40px; margin:4px 0; }
+.result-title.win{ color:#8be28b; text-shadow:3px 3px 0 var(--mint); }
+.result-title.lose{ color:#ff8a80; text-shadow:3px 3px 0 var(--pink); }
+.scorecard{ width:100%; border-collapse:collapse; margin:12px 0; font-size:16px; }
+.scorecard td{ padding:7px 6px; border-bottom:1px dashed rgba(255,248,225,.3); text-align:left; }
+.scorecard td:last-child{ text-align:right; font-weight:900; color:var(--yellow); }
+.coins-earned{ font-size:19px; font-weight:900; color:var(--yellow); margin:8px 0; }
+
+/* ---------- Shop ---------- */
+.shop-group-title{ font-family:"Arial Black",Arial,sans-serif; color:var(--yellow); margin:14px 0 6px; font-size:18px; text-shadow:1px 1px 0 var(--pink); }
+.shop-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.shop-item{
+  background:rgba(0,0,0,.32); border:3px solid rgba(255,255,255,.22); border-radius:14px;
+  padding:10px; text-align:center; position:relative;
+}
+.shop-item.equipped{ border-color:var(--yellow); box-shadow:0 0 0 2px var(--pink); }
+.shop-swatch{ width:52px; height:52px; margin:2px auto 8px; border-radius:50%; border:3px solid #fff8e1; }
+.shop-swatch.bat-shape{ border-radius:10px; width:20px; height:56px; }
+.shop-swatch.flat{ border-radius:10px; width:64px; height:44px; }
+.shop-item .name{ font-weight:800; font-size:14px; min-height:36px; }
+.shop-item .price{ color:var(--yellow); font-weight:900; margin:4px 0 8px; }
+.shop-item button{
+  width:100%; border:none; border-radius:10px; padding:9px 4px; cursor:pointer;
+  font-weight:900; font-size:14px; color:#fff;
+  background:linear-gradient(180deg,#1db954,#00913f);
+}
+.shop-item button.equip{ background:linear-gradient(180deg,#29b6f6,#0277bd); }
+.shop-item button.owned{ background:#546e7a; }
+.shop-item button:disabled{ filter:grayscale(.6) brightness(.7); cursor:default; }
+.premium-tag{
+  position:absolute; top:8px; right:-6px; background:var(--pink); color:#fff;
+  font-size:11px; font-weight:900; padding:3px 8px; border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,.4); transform:rotate(4deg);
+}
+.shop-msg{ text-align:center; min-height:20px; font-weight:800; color:var(--yellow); margin-top:10px; }
+
+.toast{
+  position:fixed; left:50%; bottom:22px; transform:translateX(-50%) translateY(80px);
+  background:#10251d; color:var(--yellow); border:2px solid var(--yellow);
+  padding:10px 18px; border-radius:999px; font-weight:900; z-index:50;
+  transition:transform .25s ease; box-shadow:0 8px 20px rgba(0,0,0,.5);
+  max-width:92vw; text-align:center;
+}
+.toast.show{ transform:translateX(-50%) translateY(0); }

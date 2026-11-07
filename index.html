@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0b3d2e">
+<title>Gali Cricket — Mohalla League</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- Top bar: coins + sound, visible on every screen -->
+  <div class="topbar">
+    <div class="coin-box"><span class="coin-dot"></span><span id="coinCount">100</span></div>
+    <button class="icon-btn" id="btnMute" title="Sound on/off">♪</button>
+  </div>
+
+  <!-- ============ HOME SCREEN ============ -->
+  <section class="screen active" id="screen-home">
+    <div class="ta-strip"></div>
+    <div class="logo-emblem">
+      <div class="emblem-ball"></div>
+      <div class="emblem-bat"></div>
+    </div>
+    <h1 class="logo">GALI<br>CRICKET</h1>
+    <div class="logo-sub">Mohalla League</div>
+
+    <div class="stat-row">
+      <div class="stat-card"><div class="num" id="statHigh">0</div><div class="lbl">High Score</div></div>
+      <div class="stat-card"><div class="num" id="statTeam">—</div><div class="lbl">Meri Team</div></div>
+    </div>
+
+    <div class="team-title">— APNI TEAM CHUNO —</div>
+    <div class="teams" id="teamList"></div>
+
+    <div class="daily-note" id="dailyNote"></div>
+
+    <button class="btn btn-play" id="btnPlay">KHELO!</button>
+    <button class="btn btn-shop" id="btnShop">DUKAAN (SHOP)</button>
+
+    <div class="howto">
+      <b>Kese khelen?</b> Bowler ball pheke ga — ball neeche wale ghare (ring) tak
+      pohanche to sahi waqt par <b>MAAR!</b> dabao. Perfect timing = <b>CHHAKKA</b>,
+      der ya jaldi = <b>OUT</b>! 12 balls, 3 wickets, target pura karo aur coins kamao.
+    </div>
+
+    <div class="footer-note">MK STUDIO</div>
+    <div class="ta-strip dots" style="margin-top:10px;"></div>
+  </section>
+
+  <!-- ============ GAME SCREEN ============ -->
+  <section class="screen" id="screen-game">
+    <div class="score-strip">
+      <span class="big" id="gsTeam">KK</span>
+      <span>Score <span class="big" id="gsScore">0</span><span class="wkts" id="gsWkts"></span></span>
+      <span>Ball <span class="big" id="gsBalls">0/12</span></span>
+      <span>Target <span class="big" id="gsTarget">0</span></span>
+      <span class="need" id="gsNeed"></span>
+    </div>
+
+    <div id="pitch">
+      <div class="pitch-name" id="pitchName">Gali No. 5</div>
+      <div class="crease top"></div>
+      <div class="crease bottom"></div>
+      <div class="bowler">
+        <div class="figure-head"></div>
+        <div class="figure-body"></div>
+      </div>
+      <div id="ballTrail"></div>
+      <div id="timingRing"></div>
+      <div id="ball"></div>
+      <div class="bat-zone">
+        <div class="batsman">
+          <div class="figure-head"></div>
+          <div class="figure-body" id="batsmanBody"></div>
+        </div>
+        <div id="bat"></div>
+        <div class="stumps"><div class="stump"></div><div class="stump"></div><div class="stump"></div></div>
+      </div>
+      <div id="banner"><div id="bannerText"></div></div>
+    </div>
+
+    <div class="ball-label" id="ballLabel">Taiyar ho jao...</div>
+    <div class="commentary" id="commentary"></div>
+
+    <button class="btn" id="btnHit" disabled>MAAR!</button>
+    <button class="btn btn-ghost" id="btnQuit">Match Chor Do</button>
+  </section>
+
+  <!-- ============ RESULT SCREEN ============ -->
+  <section class="screen" id="screen-result">
+    <h2 class="screen-title">MATCH KHATAM</h2>
+    <div class="ta-frame result-card">
+      <div class="result-title" id="resultTitle">JEET!</div>
+      <div id="resultComment" style="font-style:italic;"></div>
+      <table class="scorecard">
+        <tr><td>Score</td><td id="rScore">0</td></tr>
+        <tr><td>Target</td><td id="rTarget">0</td></tr>
+        <tr><td>Balls Kheli</td><td id="rBalls">0</td></tr>
+        <tr><td>Chowke (4s)</td><td id="rFours">0</td></tr>
+        <tr><td>Chhakke (6s)</td><td id="rSixes">0</td></tr>
+        <tr><td>Sab Se Bara Shot</td><td id="rBest">0</td></tr>
+        <tr><td>High Score</td><td id="rHigh">0</td></tr>
+      </table>
+      <div class="coins-earned" id="rCoins">+0 Coins</div>
+    </div>
+    <button class="btn btn-play" id="btnAgain">PHIR KHELO!</button>
+    <button class="btn btn-ghost" id="btnHome">GHAR (HOME)</button>
+  </section>
+
+  <!-- ============ SHOP SCREEN ============ -->
+  <section class="screen" id="screen-shop">
+    <h2 class="screen-title">DUKAAN</h2>
+    <div style="text-align:center; font-size:14px; opacity:.9;">Coins se bat, ball, jersey aur ground badlo.<br>Premium cheezein jald arahi hein!</div>
+    <div id="shopGroups"></div>
+    <div class="shop-msg" id="shopMsg"></div>
+    <button class="btn btn-ghost" id="btnShopBack">WAPIS</button>
+  </section>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
